@@ -1,8 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import Contractors from './dbContractor.js';
+import Contractors from './models/dbContractor.js';
 import cors from 'cors';
+import router from './router/routes.js';
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -16,26 +17,28 @@ mongoose.connect(mongoUri, {
 app.use(express.json());
 //API Endpoints
 app.get('/', (req, res) => res.status(200).send('hello world '));
-app.post('/addContractor', (req, res) => {
-  const contractor = req.body;
-  console.log(contractor);
-  Contractors.create(contractor, (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(201).send(data);
-    }
-  });
-});
 
-app.get('/getContractors', (req, res) => {
-  Contractors.find((err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(data);
-    }
-  });
-});
+app.use(router);
+// app.post('/addContractor', (req, res) => {
+//   const contractor = req.body;
+
+//   Contractors.create(contractor, (err, data) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(201).send(data);
+//     }
+//   });
+// });
+
+// app.get('/getContractors', (req, res) => {
+//   Contractors.find((err, data) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(200).send(data);
+//     }
+//   });
+// });
 // Listener
 app.listen(port, () => console.log(`listening om localhost ${port}`));
