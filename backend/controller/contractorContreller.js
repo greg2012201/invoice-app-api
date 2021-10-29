@@ -10,7 +10,7 @@ export const createContractor = (req, res) => {
     }
   });
 };
-export const getListOfContractors = (req, res) => {
+export const getListOfContractors = async (req, res) => {
   Contractors.find((err, data) => {
     if (err) {
       res.status(500).send(err);
@@ -36,9 +36,8 @@ export const findContractor = async (req, res) => {
       },
     ]);
 
-    res.send(result);
+    res.status(200).send(result);
   } catch (e) {
-    console.log(e.message);
     res.status(500).send(e);
   }
 };
