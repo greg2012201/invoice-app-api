@@ -19,3 +19,26 @@ export const getListOfContractors = (req, res) => {
     }
   });
 };
+
+export const findContractor = async (req, res) => {
+  try {
+    let result = await Contractors.aggregate([
+      {
+        $search: {
+          autocomplete: {
+            query: `${req.query.search}`,
+            path: 'name',
+            fuzzy: {
+              maxEdits: 2,
+            },
+          },
+        },
+      },
+    ]);
+
+    res.send(result);
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send(e);
+  }
+};
