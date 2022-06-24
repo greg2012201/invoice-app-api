@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const contractorSchema =   new Schema({
   name: String,
-  nip: Number,
+  nip: String,
   address: String,
   tel: String,
   email: String,
