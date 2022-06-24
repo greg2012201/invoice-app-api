@@ -13,7 +13,7 @@ mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   autoIndex: true,
 });
-// Midlewares
+// Middleware
 app.use(express.json());
 //API Endpoints
 app.get('/', (req, res) => res.status(200).send('hello world '));
