@@ -2,10 +2,10 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
 extend type Query {
-    getContractors: Contractors
+    getContractors: Contractor
 }
 extend type Mutation {
-    addContractor(nip: String): Boolean 
+    addContractor(ContractorInput): Boolean 
 }
 
 type Invoice {
@@ -13,13 +13,22 @@ type Invoice {
     title: String
 }
 
-type Contractors {
+type Contractor {
     name: String,
     nip: Number,
     address: String,
     tel: String,
     email: String,
     invoices: [Invoice]
+
+}
+input ContractorInput {
+    name: String,
+    nip: Number,
+    address: String,
+    tel: String,
+    email: String,
+  
 
 }
 
