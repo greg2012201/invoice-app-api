@@ -5,7 +5,12 @@ extend type Query {
     getContractors: Contractor
 }
 extend type Mutation {
-    addContractor(ContractorInput): Boolean 
+    addContractor(
+        name: String,
+        nip: String,
+        address: String,
+        tel: String,
+        email: String): Boolean 
 }
 
 type Invoice {
@@ -15,21 +20,11 @@ type Invoice {
 
 type Contractor {
     name: String,
-    nip: Number,
+    nip: String,
     address: String,
     tel: String,
     email: String,
     invoices: [Invoice]
 
 }
-input ContractorInput {
-    name: String,
-    nip: Number,
-    address: String,
-    tel: String,
-    email: String,
-  
-
-}
-
 `
