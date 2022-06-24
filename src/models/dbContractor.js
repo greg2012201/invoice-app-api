@@ -6,7 +6,7 @@ const contractorSchema =   new Schema({
   name: String,
   nip: Number,
   address: String,
-  tel: Number,
+  tel: String,
   email: String,
   invoices: Array,
 },
