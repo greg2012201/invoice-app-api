@@ -1,5 +1,5 @@
-import dbContractor from "./dbContractor";
+import Contractor from "./Contractor";
 
-const models = {dbContractor} 
+const models = {Contractor} 
 
 export default models

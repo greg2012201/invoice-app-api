@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import Contractors from './src/models/dbContractor.js';
+import Contractor from './src/models/Contractor.js';
 import cors from 'cors';
 
 dotenv.config();
