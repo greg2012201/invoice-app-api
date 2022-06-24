@@ -11,7 +11,7 @@ const contractorSchema =   new Schema({
   invoices: Array,
 },
 {
-    collection: 'Challenge',
+    collection: 'Contractor',
     timestamps: true,
   });
 
