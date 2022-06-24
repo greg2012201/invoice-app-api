@@ -1,8 +1,11 @@
+
+import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import Contractor from './src/models/Contractor.js';
 import cors from 'cors';
+import schema from './schema/index.js'
+import resolvers from './resolvers/index.js'
 
 dotenv.config();
 const app = express();
@@ -13,10 +16,12 @@ mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   autoIndex: true,
 });
+// Graphql Server
+ const server = new ApolloServer({ typeDefs :schema , resolvers });
 // Middleware
 app.use(express.json());
 //API Endpoints
-app.get('/', (req, res) => res.status(200).send('hello world '));
-
+await server.start();
 // app.use(router);
 app.listen(port, () => console.log(`listening on localhost ${port}`));
+server.applyMiddleware({ app, path: '/graphql' });
