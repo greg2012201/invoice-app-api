@@ -1,12 +1,18 @@
 import mongoose from 'mongoose';
 
-const contractorSchema = mongoose.Schema({
+const Schema = mongoose.Schema
+
+const contractorSchema =   new Schema({
   name: String,
   nip: Number,
-  adress: String,
+  address: String,
   tel: Number,
   email: String,
   invoices: Array,
-});
+},
+{
+    collection: 'Challenge',
+    timestamps: true,
+  });
 
-export default mongoose.model('contractors', contractorSchema);
+export default mongoose.model('Contractor', contractorSchema);
