@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
 extend type Query {
-    getContractors: Contractor
+    getContractors: [Contractor]
 }
 extend type Mutation {
     addContractor(
@@ -19,6 +19,7 @@ type Invoice {
 }
 
 type Contractor {
+    id:ID
     name: String,
     nip: String,
     address: String,

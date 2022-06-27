@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-express'
-import contractor from './Contractor.js'
+import contractor from './contractor.js'
 
 const linkSchema = gql`
   type Query {
