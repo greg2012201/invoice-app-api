@@ -6,7 +6,6 @@ export default {
     Query : {
         getContractors: async (parent, args,{models : {Contractor}}, info) => {
             try {
-                const data = await Contractor.find({})
                 return await Contractor.find({})
             }
             catch (e) {
