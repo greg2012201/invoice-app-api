@@ -13,6 +13,7 @@ app.use(cors());
 const port = process.env.PORT || 8801;
 const mongoUri = process.env.MONGO_DB_URI;
 mongoose.connect(mongoUri, {
+  dbName: 'invoiceDB',
   useNewUrlParser: true,
   autoIndex: true,
 });
