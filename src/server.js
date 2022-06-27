@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import schema from './schema/index.js'
 import resolvers from './resolvers/index.js'
+import models from './models/index.js'
 
 dotenv.config();
 const app = express();
@@ -18,7 +19,7 @@ mongoose.connect(mongoUri, {
   autoIndex: true,
 });
 // Graphql Server
- const server = new ApolloServer({ typeDefs :schema , resolvers });
+ const server = new ApolloServer({ typeDefs :schema , resolvers, context: {models} });
 // Middleware
 app.use(express.json());
 //API Endpoints
