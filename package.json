@@ -6,7 +6,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/server.js"
+    "start": "nodemon ./src/server.js",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +24,7 @@
   },
   "devDependencies": {
     "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
     "nodemon": "^2.0.16",
     "prettier": "^2.7.1"
   }
