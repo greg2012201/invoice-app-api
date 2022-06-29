@@ -1,5 +1,5 @@
-import { gql } from 'apollo-server-express'
-import contractor from './contractor.js'
+import { gql } from 'apollo-server-express';
+import contractor from './contractor.js';
 
 const linkSchema = gql`
   type Query {
@@ -9,6 +9,5 @@ const linkSchema = gql`
   type Mutation {
     _: Boolean
   }
-
-`
-export default [linkSchema, contractor]
+`;
+export default [linkSchema, contractor];

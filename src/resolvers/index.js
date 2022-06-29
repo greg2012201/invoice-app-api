@@ -1,3 +1,3 @@
-import contractor from './Contractor.js'
+import contractor from './contractor.js';
 
-export default [contractor]
+export default [contractor];

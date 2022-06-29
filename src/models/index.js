@@ -1,5 +1,5 @@
-import Contractor from "./contractor.js";
+import Contractor from './contractor.js';
 
-const models = {Contractor} 
+const models = { Contractor };
 
-export default models
+export default models;
