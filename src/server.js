@@ -18,16 +18,20 @@ mongoose.connect(mongoUri, {
   autoIndex: true,
 });
 // Graphql Server
-const server = new ApolloServer({
-  typeDefs: schema,
-  resolvers,
-  context: { models },
-});
+let apolloServer = null;
+const startServer = async () => {
+  apolloServer = new ApolloServer({
+    typeDefs: schema,
+    resolvers,
+    context: { models },
+  });
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app, path: '/graphql' });
+};
+startServer();
 // Middleware
 app.use(express.json());
 //API Endpoints
 
-await server.start();
 // app.use(router);
 app.listen(port, () => console.log(`listening on localhost ${port}`));
-server.applyMiddleware({ app, path: '/graphql' });
