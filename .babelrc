@@ -2,11 +2,21 @@
     "presets": [
       ["@babel/env", {
         "targets": {
-          "node": "current"
+          "node": "current",
+          "esmodules": true
         }
       }]
     ],
     "plugins": [
+      [
+        "module-resolver",
+        {
+          "root": ["./src"],
+          "alias": {
+            "~": "./src"
+          }
+        }
+      ],
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread"
     ]
