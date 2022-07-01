@@ -7,13 +7,9 @@ module.exports = {
     allowImportExportEverywhere: false,
     codeFrame: true,
   },
-  plugins: ['prettier'],
   env: {
     es2021: true,
     node: true,
-  },
-  babelOptions: {
-    configFile: './.babelrc',
   },
   rules: {
     'no-console': 'off',
