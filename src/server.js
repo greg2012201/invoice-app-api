@@ -3,9 +3,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import schema from './schema/index.js';
-import resolvers from './resolvers/index.js';
-import models from './models/index.js';
+import schema from 'schema';
+import resolvers from 'resolvers';
+import models from 'models';
 
 dotenv.config();
 const app = express();

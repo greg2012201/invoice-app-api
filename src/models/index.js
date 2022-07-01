@@ -1,4 +1,4 @@
-import Contractor from './contractor.js';
+import Contractor from 'models/contractor';
 
 const models = { Contractor };
 

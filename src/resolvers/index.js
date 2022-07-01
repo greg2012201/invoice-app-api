@@ -1,3 +1,3 @@
-import contractor from './contractor.js';
+import contractor from 'resolvers/contractor';
 
 export default [contractor];
