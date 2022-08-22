@@ -2,7 +2,12 @@ import mongoose from 'mongoose';
 
 export default {
   Query: {
-    getContractors: async (parent, args, { models: { Contractor } }, info) => {
+    getContractors: async (
+      parent: any,
+      args: any,
+      { models: { Contractor } }: { models: { Contractor: any } },
+      info: any
+    ) => {
       try {
         return await Contractor.find({});
       } catch (e) {
@@ -12,7 +17,12 @@ export default {
     },
   },
   Mutation: {
-    addContractor: async (parent, args, { models: { Contractor } }, info) => {
+    addContractor: async (
+      parent: any,
+      args: any,
+      { models: { Contractor } }: { models: { Contractor: any } },
+      info: any
+    ) => {
       try {
         await new Contractor({
           _id: new mongoose.Types.ObjectId(),
