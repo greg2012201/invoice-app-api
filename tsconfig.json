@@ -4,17 +4,19 @@
     "outDir": "dist",
     "module": "commonjs",
     "moduleResolution": "node",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]
     },
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "types": ["node"]
   },
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
   "exclude": ["node_modules", "**/node_modules/*"],
-  "include": ["./src/**/*"]
+  "include": ["src"]
 }
