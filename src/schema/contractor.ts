@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express';
+import { DocumentNode } from 'graphql';
 
-export default gql`
+const contractor: DocumentNode = gql`
   extend type Query {
     getContractors: [Contractor]
   }
@@ -29,3 +30,4 @@ export default gql`
     invoices: [Invoice]
   }
 `;
+export default contractor;
