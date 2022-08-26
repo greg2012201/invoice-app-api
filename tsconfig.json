@@ -4,16 +4,16 @@
     "outDir": "dist",
     "module": "commonjs",
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"]
-    },
+    "baseUrl": "./src",
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "types": ["node"]
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
   },
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
