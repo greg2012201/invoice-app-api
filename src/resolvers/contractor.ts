@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export default {
+const contractor = {
   Query: {
     getContractors: async (
       parent: any,
@@ -36,3 +36,4 @@ export default {
     },
   },
 };
+export default contractor;

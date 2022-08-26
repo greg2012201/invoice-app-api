@@ -1,3 +1,4 @@
 import contractor from 'resolvers/contractor';
 
-export default [contractor];
+const resolvers = [contractor];
+export default resolvers;
