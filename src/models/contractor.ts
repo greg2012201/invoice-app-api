@@ -1,15 +1,16 @@
 import mongoose from 'mongoose';
+import { IContractor } from 'types';
 
 const Schema = mongoose.Schema;
 
-const contractorSchema = new Schema(
+const contractorSchema = new Schema<IContractor>(
   {
     name: String,
     nip: String,
     address: String,
     tel: String,
     email: String,
-    invoices: Array,
+    /* invoices: Array, */
   },
   {
     collection: 'Contractor',
@@ -17,4 +18,4 @@ const contractorSchema = new Schema(
   }
 );
 
-export default mongoose.model('Contractor', contractorSchema);
+export default mongoose.model<IContractor>('Contractor', contractorSchema);
