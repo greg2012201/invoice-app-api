@@ -6,17 +6,12 @@ import cors from 'cors';
 import schema from 'schema';
 import resolvers from 'resolvers';
 import models from 'models';
-
 dotenv.config();
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 8801;
-const mongoUri = process.env.MONGO_DB_URI;
-mongoose.connect(mongoUri, {
-  dbName: 'invoiceDB',
-  useNewUrlParser: true,
-  autoIndex: true,
-});
+const mongoUri: string | undefined = process.env.MONGO_DB_URI;
+mongoose.connect(`${mongoUri}`, { dbName: 'invoiceDB' });
 // Graphql Server
 let server = null;
 const startServer = async () => {
