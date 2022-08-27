@@ -1,4 +1,6 @@
-export interface IContractor {
+import { Document } from 'mongoose';
+
+export interface IContractor extends Document {
   name: string;
   nip: string;
   address: string;
