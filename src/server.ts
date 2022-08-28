@@ -1,27 +1,41 @@
 import { ApolloServer } from 'apollo-server-express';
-import express from 'express';
+import express, { Request, Response } from 'express';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import schema from 'schema';
 import resolvers from 'resolvers';
 import models from 'models';
+import { handleRefreshToken } from 'utils/handleRefreshToken';
 dotenv.config();
 const app = express();
-app.use(cors());
+const clientOrigin = process.env.CLIENT_ORIGIN;
+app.use(
+  cors({
+    origin: clientOrigin,
+    credentials: true,
+  })
+);
+app.use(cookieParser());
+app.post('/refresh_token', handleRefreshToken);
 const port = process.env.PORT || 8801;
-const mongoUri: string | undefined = process.env.MONGO_DB_URI;
-mongoose.connect(`${mongoUri}`, { dbName: 'invoiceDB' });
+const mongoUri: string | undefined = process.env.MONGO_DB_URI!;
+mongoose.connect(mongoUri, { dbName: 'invoiceDB' });
 // Graphql Server
 let server = null;
 const startServer = async () => {
   server = new ApolloServer({
     typeDefs: schema,
     resolvers,
-    context: { models },
+    context: ({ req, res }: { req: Request; res: Response }) => ({
+      req,
+      res,
+      models,
+    }),
   });
   await server.start();
-  server.applyMiddleware({ app, path: '/graphql' });
+  server.applyMiddleware({ app });
 };
 startServer();
 // Middleware
