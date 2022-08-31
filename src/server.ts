@@ -35,7 +35,7 @@ const startServer = async () => {
     }),
   });
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 };
 startServer();
 // Middleware
