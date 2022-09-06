@@ -24,13 +24,16 @@ const user = {
           if (!user) {
             throw new Error('User not found');
           }
-          return user;
+          return { id: user._id.toString(), email: user.email };
         } catch (e) {
           console.log(`Error happened at Query getMe ${args}`);
           return e;
         }
       }
     ),
+  },
+  LoginResponse: {
+    id: (parent: LoginResponse) => parent._id.toString(),
   },
   Mutation: {
     register: async (
@@ -59,7 +62,7 @@ const user = {
       info: any
     ): Promise<LoginResponse | any> => {
       try {
-        const user: IUser = await User.findOne({ email: args.email });
+        const user: IUser = await User.findOne({ email: args.email }).lean();
         if (!user) {
           throw new Error('could not find user');
         }
@@ -71,7 +74,8 @@ const user = {
 
         return {
           accessToken: createAccessToken(user),
-          user,
+          email: user.email,
+          _id: user._id.toString(),
         };
       } catch (e) {
         console.log(`Error happened at Query login ${args}`);
