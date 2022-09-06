@@ -10,11 +10,11 @@ const user: DocumentNode = gql`
     login(email: String, password: String): LoginResponse
   }
   type Me {
-    _id: ID
+    id: ID
     email: String
   }
   type LoginResponse {
-    _id: ID
+    id: ID
     email: String
     accessToken: String
   }
