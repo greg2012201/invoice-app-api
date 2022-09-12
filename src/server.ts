@@ -18,7 +18,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.post('/refresh_token', handleRefreshToken);
+app.post('/refresh_token', (req, res) => handleRefreshToken({ req, res }));
 const port = process.env.PORT || 8801;
 const mongoUri: string | undefined = process.env.MONGO_DB_URI!;
 mongoose.connect(mongoUri, { dbName: 'invoiceDB' });
