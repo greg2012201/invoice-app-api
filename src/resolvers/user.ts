@@ -38,20 +38,30 @@ const user = {
   Mutation: {
     register: async (
       parent: any,
-      args: { password: string; email: string },
+      args: { password: string; email: string; name: string },
       { models: { User } }: { models: { User: any } },
       info: any
     ): Promise<boolean | any> => {
       try {
         const hashedPassword = await hash(args.password, 12);
+        if (!hashedPassword) {
+          throw new Error(`Invalid password ${args?.password}`);
+        }
+        if (!args?.email) {
+          throw new Error(`Invalid email ${args?.email}`);
+        }
+        if (!args?.name) {
+          throw new Error(`Invalid name ${args?.name}`);
+        }
         await new User({
           _id: new mongoose.Types.ObjectId().toString(),
+          name: args.name,
           email: args.email,
           password: hashedPassword,
         }).save();
         return true;
       } catch (e) {
-        console.log(`Error happened at Query register ${args}`);
+        console.log(`Error happened at Mutation register ${args}`);
         return e;
       }
     },
