@@ -61,7 +61,7 @@ const user = {
         }).save();
         return true;
       } catch (e) {
-        console.log(`Error happened at Mutation register ${args}`);
+        console.log(`Error happened at Mutation register ${e}`);
         return e;
       }
     },
