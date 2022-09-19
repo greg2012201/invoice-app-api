@@ -20,6 +20,8 @@ const user = {
         info: any
       ): Promise<IUser | any> => {
         try {
+          const testUser = await User.find({ _id: me.id });
+          console.log('testUser', testUser);
           const user: IUser = await User.findOne(
             { _id: me.id },
             { name: 1, email: 1 }
@@ -27,7 +29,11 @@ const user = {
           if (!user) {
             throw new Error('User not found');
           }
-          return { id: user._id.toString(), email: user.email };
+          return {
+            id: user._id.toString(),
+            email: user.email,
+            name: user.name,
+          };
         } catch (e) {
           console.log(`Error happened at Query getMe ${args}`);
           return e;
@@ -46,6 +52,7 @@ const user = {
       info: any
     ): Promise<boolean | any> => {
       try {
+        console.log('register args', args);
         const hashedPassword = await hash(args.password, 12);
         if (!hashedPassword) {
           throw new Error(`Invalid password ${args?.password}`);
