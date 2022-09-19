@@ -12,6 +12,7 @@ const user: DocumentNode = gql`
   type Me {
     id: ID
     email: String
+    name: String
   }
   type LoginResponse {
     id: ID
