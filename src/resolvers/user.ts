@@ -20,7 +20,10 @@ const user = {
         info: any
       ): Promise<IUser | any> => {
         try {
-          const user: IUser = await User.findOne({ _id: me.id });
+          const user: IUser = await User.findOne(
+            { _id: me.id },
+            { name: 1, email: 1 }
+          ).lean();
           if (!user) {
             throw new Error('User not found');
           }
