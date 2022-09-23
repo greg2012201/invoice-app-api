@@ -98,7 +98,15 @@ const user = {
           _id: user._id.toString(),
         };
       } catch (e) {
-        console.log(`Error happened at Query login ${args}`);
+        console.log(`Error happened at Mutation login ${args}`);
+        return e;
+      }
+    },
+    logout: async (parent: any, args: any, { res }: { res: Response }) => {
+      try {
+        await sendRefreshToken(res, '');
+      } catch (e) {
+        console.log(`Error happened at Mutation logout ${e}`);
         return e;
       }
     },
