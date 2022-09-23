@@ -21,7 +21,6 @@ const user = {
       ): Promise<IUser | any> => {
         try {
           const testUser = await User.find({ _id: me.id });
-          console.log('testUser', testUser);
           const user: IUser = await User.findOne(
             { _id: me.id },
             { name: 1, email: 1 }
