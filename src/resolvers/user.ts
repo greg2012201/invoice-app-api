@@ -105,6 +105,7 @@ const user = {
     logout: async (parent: any, args: any, { res }: { res: Response }) => {
       try {
         await sendRefreshToken(res, '');
+        return true;
       } catch (e) {
         console.log(`Error happened at Mutation logout ${e}`);
         return e;
