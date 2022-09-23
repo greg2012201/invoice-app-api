@@ -6,7 +6,7 @@ const user: DocumentNode = gql`
     getMe: Me
   }
   extend type Mutation {
-    register(name: String, email: String, password: String): Boolean
+    register(name: String, email: String, password: String): String
     login(email: String, password: String): LoginResponse
     logout: Boolean
   }
