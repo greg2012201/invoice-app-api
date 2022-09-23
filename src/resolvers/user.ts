@@ -68,8 +68,8 @@ const user = {
           password: hashedPassword,
         });
         await Promise.all([
-          await user.save(),
-          await sendRefreshToken(res, createRefreshToken(user)),
+          user.save(),
+          sendRefreshToken(res, createRefreshToken(user)),
         ]);
         return createAccessToken(user);
       } catch (e) {
