@@ -47,11 +47,10 @@ const user = {
     register: async (
       parent: any,
       args: { password: string; email: string; name: string },
-      { models: { User } }: { models: { User: any } },
+      { models: { User }, res }: { models: { User: any }; res: Response },
       info: any
     ): Promise<boolean | any> => {
       try {
-        console.log('register args', args);
         const hashedPassword = await hash(args.password, 12);
         if (!hashedPassword) {
           throw new Error(`Invalid password ${args?.password}`);
@@ -62,13 +61,17 @@ const user = {
         if (!args?.name) {
           throw new Error(`Invalid name ${args?.name}`);
         }
-        await new User({
+        const user = new User({
           _id: new mongoose.Types.ObjectId().toString(),
           name: args.name,
           email: args.email,
           password: hashedPassword,
-        }).save();
-        return true;
+        });
+        await Promise.all([
+          await user.save(),
+          await sendRefreshToken(res, createRefreshToken(user)),
+        ]);
+        return createAccessToken(user);
       } catch (e) {
         console.log(`Error happened at Mutation register ${e}`);
         return e;
