@@ -24,7 +24,7 @@ export const handleRefreshToken = async ({ req, res }: Args) => {
     return res.send({ ok: false, accessToken: '' });
   }
 
-  const user: IUser | null = await User.findOne({ id: payload.userId });
+  const user: IUser | null = await User.findOne({ _id: payload.userId });
 
   if (!user) {
     return res.send({ ok: false, accessToken: '' });
