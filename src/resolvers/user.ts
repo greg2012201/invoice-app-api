@@ -5,6 +5,7 @@ import { IUser, IMe } from 'types';
 import { sendRefreshToken } from 'utils/sendRefreshToken';
 import { createAccessToken, createRefreshToken } from 'utils/createToken';
 import { Response } from 'express';
+import { ApolloError } from 'apollo-server-express';
 
 interface LoginResponse extends IUser {
   accessToken: string;
@@ -67,6 +68,21 @@ const user = {
           email: args.email,
           password: hashedPassword,
         });
+        const foundUser = await User.findOne({
+          $or: [{ name: args?.name }, { email: args?.email }],
+        });
+        if (foundUser?.name == args?.name) {
+          throw new ApolloError(
+            `The user with name: ${args?.name} already exists`,
+            'DUPLICATED_USER_NAME'
+          );
+        }
+        if (foundUser?.email == args?.email) {
+          throw new ApolloError(
+            `The user with email: ${args?.email} already exists`,
+            'DUPLICATED_USER_EMAIL'
+          );
+        }
         await Promise.all([
           user.save(),
           sendRefreshToken(res, createRefreshToken(user)),
