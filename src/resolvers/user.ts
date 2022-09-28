@@ -35,7 +35,7 @@ const user = {
             name: user.name,
           };
         } catch (e) {
-          console.log(`Error happened at Query getMe ${args}`);
+          console.log(`Error happened at Query getMe, error: ${e}`);
           return e;
         }
       }
@@ -116,7 +116,7 @@ const user = {
           _id: user._id.toString(),
         };
       } catch (e) {
-        console.log(`Error happened at Mutation login ${args}`);
+        console.log(`Error happened at Mutation login, error: ${e}`);
         return e;
       }
     },
