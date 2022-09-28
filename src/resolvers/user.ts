@@ -102,11 +102,11 @@ const user = {
       try {
         const user: IUser = await User.findOne({ email: args.email }).lean();
         if (!user) {
-          throw new Error('could not find user');
+          throw new ApolloError('Could not find user', 'USER_NOT_FOUND');
         }
         const valid = await compare(args.password, user.password);
         if (!valid) {
-          throw new Error('bad password');
+          throw new ApolloError('Password is incorrect', 'INVALID_PASSWORD');
         }
         sendRefreshToken(res, createRefreshToken(user));
 
