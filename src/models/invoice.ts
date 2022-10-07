@@ -12,7 +12,8 @@ const invoiceSchema = new Schema<IInvoice>({
   sumVAT: Number,
   grossValue: Number,
   comments: String,
-  contractor: { type: Schema.Types.ObjectId, ref: 'Contractor' },
+  buyer: { type: Schema.Types.ObjectId, ref: 'Contractor' },
+  seller: { type: Schema.Types.ObjectId, ref: 'Contractor' },
 });
 
 export default mongoose.model<IInvoice>('Invoice', invoiceSchema);
