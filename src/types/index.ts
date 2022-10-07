@@ -18,7 +18,7 @@ export interface IContractor extends Document {
   email: string;
   invoices: TInvoice[];
 }
-export type TContractorRef = {
+export type TRef = {
   type: Types.ObjectId;
   ref: string;
 };
@@ -27,7 +27,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  contractors: TContractorRef[];
+  contractors: TRef[];
 }
 
 export interface IMe {
