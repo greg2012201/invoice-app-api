@@ -4,6 +4,7 @@ export type TRef = {
   type: Types.ObjectId;
   ref: string;
 };
+
 export interface IInvoice {
   serviceName: string;
   quantity: number;
@@ -14,6 +15,8 @@ export interface IInvoice {
   grossValue: number;
   comments: string;
   contractor: TRef;
+  seller: TRef;
+  buyer: TRef;
 }
 export interface IContractor extends Document {
   name: string;
