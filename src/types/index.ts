@@ -1,6 +1,10 @@
 import { Document, Types } from 'mongoose';
 
-export type TInvoice = {
+export type TRef = {
+  type: Types.ObjectId;
+  ref: string;
+};
+export interface IInvoice {
   serviceName: string;
   quantity: number;
   priceNet: number;
@@ -9,19 +13,17 @@ export type TInvoice = {
   sumVAT: number;
   grossValue: number;
   comments: string;
-};
+  contractor: TRef;
+}
 export interface IContractor extends Document {
   name: string;
   nip: string;
   address: string;
   tel: string;
   email: string;
-  invoices: TInvoice[];
+  invoices: TRef[];
 }
-export type TRef = {
-  type: Types.ObjectId;
-  ref: string;
-};
+
 export interface IUser extends Document {
   _id: Types.ObjectId;
   name: string;
