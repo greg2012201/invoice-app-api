@@ -9,6 +9,7 @@ const userSchema = new Schema<IUser>(
     name: String,
     email: String,
     password: String,
+    contractors: [{ type: Schema.Types.ObjectId, ref: 'Contractor' }],
   },
   {
     collection: 'User',
