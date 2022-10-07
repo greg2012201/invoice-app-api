@@ -1,14 +1,24 @@
 import { Document, Types } from 'mongoose';
 
+export type TInvoice = {
+  serviceName: string;
+  quantity: number;
+  priceNet: number;
+  valueNet: number;
+  VATRate: string;
+  sumVAT: number;
+  grossValue: number;
+  comments: string;
+};
 export interface IContractor extends Document {
   name: string;
   nip: string;
   address: string;
   tel: string;
   email: string;
-  /*    invoices: Array, */
+  invoices: TInvoice[];
 }
-export type IContractorRef = {
+export type TContractorRef = {
   type: Types.ObjectId;
   ref: string;
 };
@@ -17,7 +27,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  contractors: IContractorRef[];
+  contractors: TContractorRef[];
 }
 
 export interface IMe {
