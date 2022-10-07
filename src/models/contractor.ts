@@ -3,6 +3,8 @@ import { IContractor } from 'types';
 
 const Schema = mongoose.Schema;
 
+const invoiceSchema = new Schema({});
+
 const contractorSchema = new Schema<IContractor>(
   {
     name: String,
