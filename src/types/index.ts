@@ -8,10 +8,10 @@ export interface IContractor extends Document {
   email: string;
   /*    invoices: Array, */
 }
-export interface IContractorRef {
+export type IContractorRef = {
   type: Types.ObjectId;
   ref: string;
-}
+};
 export interface IUser extends Document {
   _id: Types.ObjectId;
   name: string;
