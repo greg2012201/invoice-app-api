@@ -10,7 +10,7 @@ const contractorSchema = new Schema<IContractor>(
     address: String,
     tel: String,
     email: String,
-    /* invoices: Array, */
+    invoices: [{ type: Schema.Types.ObjectId, ref: 'Invoice' }],
   },
   {
     collection: 'Contractor',
