@@ -14,7 +14,6 @@ export interface IInvoice {
   sumVAT: number;
   grossValue: number;
   comments: string;
-  contractor: TRef;
   seller: TRef;
   buyer: TRef;
 }
