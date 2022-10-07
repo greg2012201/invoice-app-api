@@ -3,17 +3,6 @@ import { IContractor } from 'types';
 
 const Schema = mongoose.Schema;
 
-const invoiceSchema = new Schema({
-  serviceName: String,
-  quantity: Number,
-  priceNet: Number,
-  valueNet: Number,
-  VATRate: String,
-  sumVAT: Number,
-  grossValue: Number,
-  comments: String,
-});
-
 const contractorSchema = new Schema<IContractor>(
   {
     name: String,
@@ -21,7 +10,7 @@ const contractorSchema = new Schema<IContractor>(
     address: String,
     tel: String,
     email: String,
-    invoices: [invoiceSchema],
+    invoices: [{ type: Schema.Types.ObjectId, ref: 'Invoice' }],
   },
   {
     collection: 'Contractor',
