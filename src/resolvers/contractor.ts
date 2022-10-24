@@ -26,8 +26,8 @@ const contractor = {
     ): Promise<Boolean | any> => {
       try {
         await new Contractor({
-          _id: new mongoose.Types.ObjectId(),
           ...args,
+          _id: new mongoose.Types.ObjectId(),
         }).save();
         return true;
       } catch (e) {
