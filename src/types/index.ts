@@ -1,4 +1,6 @@
+import { Schema } from 'mongoose';
 import { Document, Types } from 'mongoose';
+import Contractor from 'models/contractor';
 
 export type TRef = {
   type: Types.ObjectId;
@@ -14,10 +16,11 @@ export interface IInvoice {
   sumVAT: number;
   grossValue: number;
   comments: string;
-  seller: TRef;
-  buyer: TRef;
+  seller: IContractor['_id'];
+  buyer: IContractor['_id'];
 }
 export interface IContractor extends Document {
+  _id: Types.ObjectId;
   name: string;
   nip: string;
   address: string;
@@ -31,7 +34,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  contractors: TRef[];
+  contractors: IContractor['_id'][];
 }
 
 export interface IMe {
