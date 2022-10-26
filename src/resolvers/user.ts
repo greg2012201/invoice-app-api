@@ -1,5 +1,5 @@
 import { isAuth } from 'middleware/isAuth';
-import mongoose from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { compare, hash } from 'bcryptjs';
 import { IUser, IMe } from 'types';
 import { sendRefreshToken } from 'utils/sendRefreshToken';
@@ -17,11 +17,10 @@ const user = {
       async (
         parent: any,
         args: null,
-        { models: { User }, me }: { models: { User: any }; me: IMe },
+        { models: { User }, me }: { models: { User: Model<IUser> }; me: IMe },
         info: any
       ): Promise<IUser | any> => {
         try {
-          const testUser = await User.find({ _id: me.id });
           const user: IUser = await User.findOne(
             { _id: me.id },
             { name: 1, email: 1 }
@@ -48,7 +47,10 @@ const user = {
     register: async (
       parent: any,
       args: { password: string; email: string; name: string },
-      { models: { User }, res }: { models: { User: any }; res: Response },
+      {
+        models: { User },
+        res,
+      }: { models: { User: Model<IUser> }; res: Response },
       info: any
     ): Promise<boolean | any> => {
       try {
@@ -96,7 +98,10 @@ const user = {
     login: async (
       parent: any,
       args: { password: string; email: string },
-      { models: { User }, res }: { models: { User: any }; res: Response },
+      {
+        models: { User },
+        res,
+      }: { models: { User: Model<IUser> }; res: Response },
       info: any
     ): Promise<LoginResponse | any> => {
       try {
