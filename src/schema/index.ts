@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 import { DocumentNode } from 'graphql';
 import contractor from 'schema/contractor';
 import user from 'schema/user';
+import invoice from 'schema/invoice';
 
 const linkSchema: DocumentNode = gql`
   type Query {
@@ -12,5 +13,5 @@ const linkSchema: DocumentNode = gql`
     _: Boolean
   }
 `;
-const schema: DocumentNode[] = [linkSchema, contractor, user];
+const schema: DocumentNode[] = [linkSchema, contractor, user, invoice];
 export default schema;
