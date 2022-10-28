@@ -12,6 +12,7 @@ const invoiceSchema = new Schema<IInvoice>({
   sumVAT: Number,
   grossValue: Number,
   comments: String,
+  issuedAt: { type: Date, default: null },
   buyer: { type: Schema.Types.ObjectId, ref: 'Contractor' },
   seller: { type: Schema.Types.ObjectId, ref: 'Contractor' },
 });
