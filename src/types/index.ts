@@ -10,6 +10,7 @@ export interface IInvoice {
   sumVAT: number;
   grossValue: number;
   comments?: string;
+  issuedAt?: Date;
   seller: IContractor['_id'];
   buyer: IContractor['_id'];
 }
