@@ -18,5 +18,5 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
   "exclude": ["node_modules", "**/node_modules/*"],
-  "include": ["src", "jest.config.js"]
+  "include": ["src", "jest.config.ts"]
 }
