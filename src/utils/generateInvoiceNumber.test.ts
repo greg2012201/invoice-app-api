@@ -14,11 +14,8 @@ import { MongoMemoryServer as MongoMemoryServerType } from 'mongodb-memory-serve
 import { generateInvoiceNumber } from './generateInvoiceNumber';
 
 const { Invoice } = models;
-const invoiceMock = {
-  issuedAt: dayjs('10/02/2022'),
-  invoiceNumber: '1/10/2022',
-  shortInvoiceNumber: 1,
-};
+
+const mockSellerRef = new mongoose.Types.ObjectId();
 
 describe('generateInvoiceNumber', () => {
   let mongoDBMock: MongoMemoryServerType;
@@ -28,17 +25,33 @@ describe('generateInvoiceNumber', () => {
     const uri = mongoDBMock.getUri();
     await mongoose.connect(uri);
   });
-  beforeEach(async () => {
-    await new Invoice(invoiceMock).save();
-  });
 
   afterAll(async () => {
     mongoose.disconnect();
     mongoDBMock.stop();
   });
   it('should create number correctly regarding on data from db', async () => {
-    const mockDate = dayjs();
-    // await generateInvoiceNumber(mockDate);
-    // const result = await Invoice.find();
+    const invoiceMock = {
+      issuedAt: dayjs('10/02/2022'),
+      invoiceNumber: '1/10/2022',
+      shortInvoiceNumber: 1,
+      seller: mockSellerRef,
+    };
+    const secondInvoiceMock = {
+      issuedAt: dayjs('10/08/2022'),
+      invoiceNumber: '2/10/2022',
+      shortInvoiceNumber: 2,
+      seller: mockSellerRef,
+    };
+    await Promise.all([
+      new Invoice(invoiceMock).save(),
+      new Invoice(secondInvoiceMock).save(),
+    ]);
+    const mockDate = dayjs().format('MM/DD/YYYY');
+    const newInvoiceNumber = await generateInvoiceNumber(
+      new Date(mockDate),
+      mockSellerRef
+    );
+    expect(newInvoiceNumber).toEqual(`1/${dayjs().month() + 1}/2022`);
   });
 });
