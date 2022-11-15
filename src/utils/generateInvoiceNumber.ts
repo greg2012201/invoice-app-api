@@ -1,13 +1,14 @@
 import dayjs from 'dayjs';
 import models from 'models';
 import { Types } from 'mongoose';
+import type { TInvoiceNumberData } from 'types';
 
 const { Invoice } = models;
 
 export const generateInvoiceNumber = async (
   date: Date,
   sellerRef: Types.ObjectId
-): Promise<string | null> => {
+): Promise<TInvoiceNumberData | null> => {
   const argMonth = dayjs(date).month() + 1;
   const argYear = dayjs(date).year();
   const foundInvoiceLastShortNumber = await Invoice.aggregate([
@@ -25,7 +26,12 @@ export const generateInvoiceNumber = async (
     { $project: { shortInvoiceNumber: 1 } },
     { $limit: 1 },
   ]);
-  const invoiceLastShortNumber = foundInvoiceLastShortNumber[0];
+  const invoiceLastShortNumber: number =
+    foundInvoiceLastShortNumber[0]?.shortInvoiceNumber ?? 0;
   let newShortNumber = invoiceLastShortNumber ? invoiceLastShortNumber + 1 : 1;
-  return `${newShortNumber}/${argMonth}/${argYear}`;
+  // it's needed to return an object with short number and number string
+  return {
+    invoiceNumber: `${newShortNumber}/${argMonth}/${argYear}`,
+    shortInvoiceNumber: newShortNumber,
+  };
 };
