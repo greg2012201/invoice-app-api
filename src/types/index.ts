@@ -37,3 +37,8 @@ export interface IUser extends Document {
 export interface IMe {
   id: Types.ObjectId;
 }
+
+export type TInvoiceNumberData = {
+  invoiceNumber: string;
+  shortInvoiceNumber: number;
+};
