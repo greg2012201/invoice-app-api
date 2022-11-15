@@ -12,6 +12,7 @@ import models from 'models';
 import dayjs from 'dayjs';
 import { MongoMemoryServer as MongoMemoryServerType } from 'mongodb-memory-server-core/lib/MongoMemoryServer';
 import { generateInvoiceNumber } from './generateInvoiceNumber';
+import type { TInvoiceNumberData } from 'types';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 
@@ -50,11 +51,11 @@ describe('generateInvoiceNumber', () => {
       new Invoice(secondInvoiceMock).save(),
     ]);
     const mockDate = dayjs().format('MM/DD/YYYY');
-    const newInvoiceNumber = await generateInvoiceNumber(
-      new Date(mockDate),
-      mockSellerRef
+    const newInvoiceNumberData: TInvoiceNumberData | null =
+      await generateInvoiceNumber(new Date(mockDate), mockSellerRef);
+    expect(newInvoiceNumberData?.invoiceNumber).toEqual(
+      `1/${dayjs().month() + 1}/2022`
     );
-    expect(newInvoiceNumber).toEqual(`1/${dayjs().month() + 1}/2022`);
   });
   it('should create next invoice number in the order in the same month', async () => {
     const invoiceMock = {
@@ -74,10 +75,8 @@ describe('generateInvoiceNumber', () => {
       new Invoice(secondInvoiceMock).save(),
     ]);
     const mockDate = dayjs('10-31-2022', 'MM/DD/YYYY').format('MM/DD/YYYY');
-    const newInvoiceNumber = await generateInvoiceNumber(
-      new Date(mockDate),
-      mockSellerRef
-    );
-    expect(newInvoiceNumber).toEqual(`3/10/2022`);
+    const newInvoiceNumberData: TInvoiceNumberData | null =
+      await generateInvoiceNumber(new Date(mockDate), mockSellerRef);
+    expect(newInvoiceNumberData?.invoiceNumber).toEqual(`3/10/2022`);
   });
 });
