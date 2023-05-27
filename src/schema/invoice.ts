@@ -14,6 +14,9 @@ const invoice: DocumentNode = gql`
       comments: Float
     ): Boolean
   }
+  extend type Query {
+    getInvoiceNumber: String
+  }
 `;
 
 export default invoice;
